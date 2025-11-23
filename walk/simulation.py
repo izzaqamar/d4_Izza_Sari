@@ -18,9 +18,9 @@ class Simulation:
         # Run a single simulation until Alex arrives somewhere.
 
         # Returns
-        # destination': where Alex ended up ('Pentagon', 'Kaia', or boundary)
-        #'seconds': number of seconds it took
-        #'steps': number of steps taken
+        # destination: where Alex ended up ('Pentagon', 'Kaia', or boundary)
+        # seconds: number of seconds it took
+        # steps: number of steps taken
 
         walker = Walker(self.location)
 
