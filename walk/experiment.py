@@ -1,7 +1,6 @@
 # Inf/201 project (D4)
 # Name: Izza Qamar, Sari Ali
 
-
 #Module providing the Experiment class for running multiple simulations.
 
 import random
