@@ -46,7 +46,6 @@ deps = ["pytest", "pytest-cov"]
 description = "Run tests with coverage for walk"
 commands = [["pytest", "--cov=walk", "--cov-report=term-missing", "--cov-report=html", "--cov-report=xml", "--cov-fail-under=80", "tests/"]]
 
-
 [tool.tox.env.format]
 deps = ["flake8"]
 description = "Check code style using flake8"
