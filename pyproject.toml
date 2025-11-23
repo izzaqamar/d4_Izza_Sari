@@ -1,0 +1,54 @@
+# Inf/201 project (D4)
+# Name: Izza Qamar, Sari Ali
+
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "walk"
+version = "0.0.1"
+authors = [
+  { name="Izza Qamar", email="izzaqamarbci@gmail.com" },
+  { name="Sari Ali" }
+]
+description = "A simulation of Alex's random walk "
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = ["matplotlib",
+                "numpy",
+                "pyyaml"]
+
+classifiers = [
+    "Programming Language :: Python :: 3"
+]
+license = "MIT"
+license-files = ["LICENSE*"]
+
+[project.urls]
+Homepage = "https://github.com/izzaqamar/d4_Izza_Sari.git"
+Issues = "https://github.com/izzaqamar/d4_Izza_Sari/issues"
+
+[tool.setuptools]
+script-files = ["examples/walk_example.py"]
+
+[tool.tox]
+requires = ["tox>=4.32"]
+env_list = ["format", "test"]
+
+[tool.tox.env_run_base]
+deps = ["pytest", "pytest-cov"]
+description = "Run tests under {base_python}"
+commands = [["pytest", "--cov=walk", "--cov-report=term-missing", "--cov-report=html", "tests/"]]
+
+[tool.tox.env.test]
+deps = ["pytest", "pytest-cov"]
+description = "Run tests with coverage for walk"
+commands = [["pytest", "--cov=walk", "--cov-report=term-missing", "--cov-report=html", "--cov-report=xml", "--cov-fail-under=80", "tests/"]]
+
+[tool.tox.env.format]
+deps = ["flake8"]
+description = "Check code style using flake8"
+skip_install = true
+commands = [["flake8", "--max-line-length", "120", "--exclude=.git,__pycache__,.tox,.eggs,*.egg", "src", "tests"]]
+
