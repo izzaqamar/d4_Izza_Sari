@@ -52,6 +52,6 @@ description = "Check code style using flake8"
 skip_install = true
 commands = [["flake8", "--max-line-length", "120",
              "--exclude=.git,__pycache__,.tox,.eggs,*.egg",
-             "walk", "examples"]]
+             "walk", "examples","tests"]]
 
 
