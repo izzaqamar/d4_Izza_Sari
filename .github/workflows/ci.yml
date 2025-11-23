@@ -1,0 +1,56 @@
+# Inf/201 project (D4)
+# Name: Izza Qamar, Sari Ali
+name: Python CI
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "**" ]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ["3.12", "3.13"]   
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip"
+
+      - name: Show Python version
+        run: python --version
+
+      - name: Install dependencies
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install tox
+
+      # Stage: Lint - Check code formatting with flake8
+      - name: Run formatting checks
+        run: |
+          source venv/bin/activate
+          tox -e format
+
+      # Stage: Test - Run pytest with coverage
+      - name: Run test suite with coverage
+        run: |
+          source venv/bin/activate
+          tox -e test
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report-${{ matrix.python-version }}
+          path: |
+            coverage.xml
+            htmlcov/
