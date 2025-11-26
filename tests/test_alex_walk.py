@@ -1,10 +1,8 @@
-"""
-Unit tests for the walk package.
-"""
-
+print("DEBUG: starting test file")
 import walk
 
 print("WALK PATH:", walk.__file__)
+
 import pytest
 from walk.location import Location
 from walk.walker import Walker
