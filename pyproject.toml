@@ -47,6 +47,7 @@ commands = [["pytest"]]
 deps = ["pytest", "pytest-cov"]
 description = "Run tests with coverage for walk"
 skip_install = false
+usedevelop = true
 commands = [["pytest"]]
 
 
@@ -64,3 +65,5 @@ addopts = "--cov=walk --cov-report=term-missing --cov-report=html --cov-report=x
 
 [tool.coverage.run]
 source = ["./walk"]
+branch = true
+
