@@ -43,7 +43,8 @@ commands = [["pytest", "tests/"]]
 deps = ["pytest", "pytest-cov"]
 description = "Run tests with coverage for walk"
 skip_install = false
-commands = [["pytest", "tests/"]]
+commands = [["pytest"]]
+
 
 [tool.tox.env.format]
 deps = ["flake8"]
