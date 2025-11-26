@@ -27,6 +27,9 @@ license-files = ["LICENSE*"]
 Homepage = "https://github.com/izzaqamar/d4_Izza_Sari.git"
 Issues = "https://github.com/izzaqamar/d4_Izza_Sari/issues"
 
+[tool.setuptools.packages.find]
+include = ["walk"]
+
 [tool.setuptools]
 script-files = ["examples/walk_example.py"]
 
