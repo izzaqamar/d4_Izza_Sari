@@ -37,7 +37,8 @@ env_list = ["format", "test"]
 [tool.tox.env_run_base]
 deps = ["pytest", "pytest-cov"]
 description = "Run tests under {base_python}"
-commands = [["pytest", "tests/"]]
+commands = [["pytest"]]
+
 
 [tool.tox.env.test]
 deps = ["pytest", "pytest-cov"]
