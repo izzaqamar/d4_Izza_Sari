@@ -1,37 +1,34 @@
-import pytest
-from walk.location import Location
+from unittest.mock import MagicMock, patch
 from walk.experiment import Experiment
+from walk.location import Location
 
 
-@pytest.fixture
-def simple_location():
-    return Location(
-        pentagon_pos=20,
-        audmax_pos=50,
-        kaia_pos=80,
-        p_pentagon=0.5,
-        p_kaia=0.5
-    )
+@patch("walk.experiment.Simulation")
+def test_experiment_execute(mock_sim):
+    mock_sim_instance = MagicMock()
+    mock_sim_instance.run.return_value = {"destination": "Kaia", "seconds": 5, "steps": 10}
+    mock_sim.return_value = mock_sim_instance
 
-
-def test_experiment_execute(simple_location):
-    exp = Experiment(num_simulations=10, seed=123, location=simple_location)
+    exp = Experiment(num_simulations=3, seed=42, location=Location())
     results = exp.execute()
 
-    assert len(results) == 10
-    assert "destination" in results[0]
-    assert "seconds" in results[0]
-    assert "steps" in results[0]
+    assert len(results) == 3
+    assert results[0]["destination"] == "Kaia"
 
 
-def test_experiment_analyze(simple_location):
-    exp = Experiment(num_simulations=5, seed=321, location=simple_location)
-    results = exp.execute()
-    stats = exp.analyze_results(results)
+def test_experiment_analyze_results():
+    exp = Experiment(1, 0, Location())
 
-    assert "destinations" in stats
-    assert "seconds" in stats
-    assert "steps" in stats
-    assert isinstance(stats["destinations"], dict)
-    assert "min" in stats["steps"]
-    assert "mean" in stats["seconds"]
+    fake = [
+        {"destination": "Kaia", "seconds": 5, "steps": 10},
+        {"destination": "Pentagon", "seconds": 7, "steps": 20},
+    ]
+
+    summary = exp.analyze_results(fake)
+
+    assert summary["destinations"]["Kaia"] == 1
+    assert summary["destinations"]["Pentagon"] == 1
+
+    assert summary["seconds"]["min"] == 5
+    assert summary["seconds"]["max"] == 7
+    assert summary["steps"]["mean"] == 15.0

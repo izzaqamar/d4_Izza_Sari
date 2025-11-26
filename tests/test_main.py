@@ -1,15 +1,13 @@
-import pytest
 from unittest.mock import patch, MagicMock
+import pytest
 
-
-@patch("main.Experiment")
-@patch("main.Location")
-@patch("main.plt")
+# Patch the imports as used in main.py
+@patch("walk.main.Experiment")
+@patch("walk.main.Location")
+@patch("walk.main.plt")
 def test_main_runs_without_crashing(mock_plt, mock_Location, mock_Experiment):
-    # Mock location object
     mock_Location.return_value.description.return_value = "Mocked location"
 
-    # Mock experiment behavior
     mock_exp_instance = MagicMock()
     mock_exp_instance.execute.return_value = [
         {"destination": "Kaia", "seconds": 5, "steps": 20},
@@ -21,10 +19,12 @@ def test_main_runs_without_crashing(mock_plt, mock_Location, mock_Experiment):
         "steps": {"min": 20, "max": 30, "mean": 25, "std": 5},
     }
     mock_Experiment.return_value = mock_exp_instance
-
-    # Prevent plots from opening
     mock_plt.show.return_value = None
 
+    # Import main after patching
+    from walk import main
 
-    # Check we created 4 scenarios
+    main.main()
+
+    # Should be called 4 times (once per location)
     assert mock_Experiment.call_count == 4
