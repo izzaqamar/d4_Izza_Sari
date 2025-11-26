@@ -44,3 +44,4 @@ def test_arrival_pentagon(mock_rand):
 
     assert w.has_arrived() is True
     assert w.destination == "Pentagon"
+    

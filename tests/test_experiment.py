@@ -32,3 +32,4 @@ def test_experiment_analyze_results():
     assert summary["seconds"]["min"] == 5
     assert summary["seconds"]["max"] == 7
     assert summary["steps"]["mean"] == 15.0
+    

@@ -35,3 +35,4 @@ def test_description():
     text = loc.description()
     assert "Pentagon" in text
     assert "Kaia" in text
+    

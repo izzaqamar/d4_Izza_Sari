@@ -1,5 +1,4 @@
 from unittest.mock import patch, MagicMock
-import pytest
 
 # Patch the imports as used in main.py
 @patch("walk.main.Experiment")
