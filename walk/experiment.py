@@ -16,14 +16,14 @@ class Experiment:
     # location : The Location object
     def __init__(self, num_simulations, seed, location):
 
-        # random.seed(seed)
+        self.num_simulations = num_simulations
+        self.seed = seed
+        self.location = location
 
+        # Seed both random libraries for reproducibility
         if seed is not None:
             random.seed(seed)
             np.random.seed(seed)
-
-        self.num_simulations = num_simulations
-        self.location = location
 
     def execute(self):
         # Execute all simulations.
