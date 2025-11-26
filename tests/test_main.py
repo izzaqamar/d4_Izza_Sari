@@ -1,4 +1,3 @@
-import pytest
 from unittest.mock import patch, MagicMock
 
 
@@ -24,7 +23,6 @@ def test_main_runs_without_crashing(mock_plt, mock_Location, mock_Experiment):
 
     # Prevent plots from opening
     mock_plt.show.return_value = None
-
 
     # Check we created 4 scenarios
     assert mock_Experiment.call_count == 4

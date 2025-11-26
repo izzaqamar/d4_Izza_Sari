@@ -6,11 +6,7 @@ from walk.experiment import Experiment
 @pytest.fixture
 def simple_location():
     return Location(
-        pentagon_pos=20,
-        audmax_pos=50,
-        kaia_pos=80,
-        p_pentagon=0.5,
-        p_kaia=0.5
+        pentagon_pos=20, audmax_pos=50, kaia_pos=80, p_pentagon=0.5, p_kaia=0.5
     )
 
 

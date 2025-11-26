@@ -1,14 +1,9 @@
-import pytest
 from walk.location import Location
 
 
 def test_location_initialization():
     loc = Location(
-        pentagon_pos=20,
-        audmax_pos=50,
-        kaia_pos=80,
-        p_pentagon=0.5,
-        p_kaia=0.3
+        pentagon_pos=20, audmax_pos=50, kaia_pos=80, p_pentagon=0.5, p_kaia=0.3
     )
 
     assert loc.pentagon_pos == 20
