@@ -61,3 +61,5 @@ commands = [["flake8", "--max-line-length", "120",
              "walk", "examples","tests"]]
 
 
+[tool.pytest.ini_options]
+addopts = "--cov=walk --cov-report=term-missing --cov-report=html --cov-report=xml --cov-fail-under=80"
