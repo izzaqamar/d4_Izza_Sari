@@ -9,12 +9,10 @@ from .walker import Walker
 # Represents a single simulation of Alex's walk home
 class Simulation:
 
-    def __init__(self, location, seed=None):
+    def __init__(self, location):
 
         # location : Location The Location object
-
         self.location = location
-        self.seed = seed
 
     def run(self):
         # Run a single simulation until Alex arrives somewhere.
@@ -24,7 +22,7 @@ class Simulation:
         # seconds: number of seconds it took
         # steps: number of steps taken
 
-        walker = Walker(self.location, seed=self.seed)
+        walker = Walker(self.location)
 
         # Continue until Alex arrives somewhere
         while not walker.has_arrived():

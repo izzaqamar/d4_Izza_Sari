@@ -157,18 +157,6 @@ class TestExperiment:
         assert len(results) == 5
         assert all("destination" in r for r in results)
 
-    def test_experiment_reproducibility(self):
-        """Test that same seed produces same results."""
-        loc = Location()
-        exp1 = Experiment(num_simulations=10, seed=42, location=loc)
-        exp2 = Experiment(num_simulations=10, seed=42, location=loc)
-
-        results1 = exp1.execute()
-        results2 = exp2.execute()
-
-        # Results  identical with same seed
-        assert results1 == results2
-
     def test_analyze_results(self):
         """Test result analysis."""
         loc = Location(p_pentagon=1.0, p_kaia=1.0)
