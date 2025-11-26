@@ -63,4 +63,4 @@ commands = [["flake8", "--max-line-length", "120",
 addopts = "--cov=walk --cov-report=term-missing --cov-report=html --cov-report=xml --cov-fail-under=80"
 
 [tool.coverage.run]
-source = ["walk"]
+source = ["./walk"]
