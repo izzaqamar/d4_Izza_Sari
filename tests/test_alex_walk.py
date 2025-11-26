@@ -1,13 +1,15 @@
-print("DEBUG: starting test file")
-import walk
-
-print("WALK PATH:", walk.__file__)
-
 import pytest
 from walk.location import Location
 from walk.walker import Walker
 from walk.simulation import Simulation
 from walk.experiment import Experiment
+
+
+@pytest.fixture(autouse=True)
+def debug_walk_path():
+    import walk
+
+    print("WALK PATH:", walk.__file__)
 
 
 class TestLocation:
