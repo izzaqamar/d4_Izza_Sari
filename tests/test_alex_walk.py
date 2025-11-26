@@ -5,13 +5,6 @@ from walk.simulation import Simulation
 from walk.experiment import Experiment
 
 
-@pytest.fixture(autouse=True)
-def debug_walk_path():
-    import walk
-
-    print("WALK PATH:", walk.__file__)
-
-
 class TestLocation:
     """Test the Location class."""
 
