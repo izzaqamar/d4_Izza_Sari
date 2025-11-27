@@ -32,6 +32,9 @@ include = ["walk"]
 
 [tool.setuptools]
 script-files = ["examples/walk_example.py"]
+[tool.setuptools.package-data]
+walk = ["../examples/*.ipynb"]
+
 
 [tool.tox]
 requires = ["tox>=4.32"]
