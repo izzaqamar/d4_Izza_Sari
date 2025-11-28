@@ -53,6 +53,47 @@ class TestLocation:
         assert loc.is_at_boundary(100)
         assert not loc.is_at_boundary(50)
 
+    def test_is_at_pentagon(self):
+        """Test is_at_pentagon method."""
+        loc = Location()
+        assert loc.is_at_pentagon(20)
+        assert not loc.is_at_pentagon(19)
+        assert not loc.is_at_pentagon(21)
+        assert not loc.is_at_pentagon(50)
+
+    def test_is_at_kaia(self):
+        """Test is_at_kaia method."""
+        loc = Location()
+        assert loc.is_at_kaia(80)
+        assert not loc.is_at_kaia(79)
+        assert not loc.is_at_kaia(81)
+        assert not loc.is_at_kaia(50)
+
+    def test_is_at_boundary_west(self):
+        """Test is_at_boundary for west boundary."""
+        loc = Location()
+        assert loc.is_at_boundary(0)
+        assert loc.is_at_boundary(-1)
+        assert not loc.is_at_boundary(1)
+
+    def test_is_at_boundary_east(self):
+        """Test is_at_boundary for east boundary."""
+        loc = Location()
+        assert loc.is_at_boundary(100)
+        assert loc.is_at_boundary(101)
+        assert not loc.is_at_boundary(99)
+
+    def test_description(self):
+        """Test description method returns proper string."""
+        loc = Location(
+            pentagon_pos=20, audmax_pos=50, kaia_pos=80, p_pentagon=0.5, p_kaia=0.5
+        )
+        desc = loc.description()
+        assert "Pentagon at 20" in desc
+        assert "AudMax at 50" in desc
+        assert "Kaia at 80" in desc
+        assert "p=0.5" in desc
+
 
 class TestWalker:
     """Test the Walker class."""
@@ -168,3 +209,24 @@ class TestExperiment:
         assert "max" in stats["seconds"]
         assert "mean" in stats["seconds"]
         assert "std" in stats["seconds"]
+
+    def test_experiment_with_single_simulation(self):
+        """Test experiment with just one simulation."""
+        loc = Location(p_pentagon=1.0, p_kaia=1.0)
+        exp = Experiment(num_simulations=1, seed=42, location=loc)
+        results = exp.execute()
+        stats = exp.analyze_results(results)
+
+        assert len(results) == 1
+        assert sum(stats["destinations"].values()) == 1
+        assert stats["seconds"]["min"] == stats["seconds"]["max"]
+
+    def test_experiment_large_number_of_simulations(self):
+        """Test experiment with many simulations."""
+        loc = Location(p_pentagon=1.0, p_kaia=1.0)
+        exp = Experiment(num_simulations=100, seed=42, location=loc)
+        results = exp.execute()
+
+        assert len(results) == 100
+        stats = exp.analyze_results(results)
+        assert sum(stats["destinations"].values()) == 100
